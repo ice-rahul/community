@@ -18,14 +18,15 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.tamagui.myapp"
+      "bundleIdentifier": "com.community.baniyaconnects"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.tamagui.myapp"
+      "package": "com.community.baniyaconnects",
+      "googleServicesFile": "./google/google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png",

@@ -1,22 +1,16 @@
-import {
-  Anchor,
-  Button,
-  H1,
-  Paragraph,
-  Separator,
-  Sheet,
-  XStack,
-  YStack,
-  useToastController,
-} from '@my/ui'
+import { Button, H1, Paragraph, Separator, Sheet, XStack, YStack, useToastController } from '@my/ui'
 import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
+import { signInAnonymously, signOut } from 'app/auth/firebase'
+import { useAuth } from 'app/auth/firebase/use-auth'
 import React, { useState } from 'react'
+import { Text } from 'react-native'
 import { useLink } from 'solito/link'
 
 export function HomeScreen() {
   const linkProps = useLink({
     href: '/user/nate',
   })
+  const auth = useAuth()
 
   return (
     <YStack f={1} jc="center" ai="center" p="$4" space>
@@ -28,25 +22,19 @@ export function HomeScreen() {
         </Paragraph>
 
         <Separator />
-        <Paragraph ta="center">
-          Made by{' '}
-          <Anchor color="$color12" href="https://twitter.com/natebirdman" target="_blank">
-            @natebirdman
-          </Anchor>
-          ,{' '}
-          <Anchor
-            color="$color12"
-            href="https://github.com/tamagui/tamagui"
-            target="_blank"
-            rel="noreferrer"
-          >
-            give it a ⭐️
-          </Anchor>
-        </Paragraph>
       </YStack>
 
       <XStack>
         <Button {...linkProps}>Link to user</Button>
+
+        {!auth && <Button onPress={signInAnonymously}>Sign in</Button>}
+
+        {auth && (
+          <>
+            <Text>Welcome, {auth.uid}</Text>
+            <Button onPress={signOut}>Sign Out</Button>
+          </>
+        )}
       </XStack>
 
       <SheetDemo />
